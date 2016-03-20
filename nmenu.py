@@ -12,15 +12,13 @@ def dmenu(items):
 def directory(base):
     if os.path.isdir(base):
         os.chdir(base)
-        paths = ["e", ".."] + sorted(os.listdir("."))
+        paths = [".."] + sorted(os.listdir("."))
         choice = dmenu(paths)
         new_dir = base + choice[:-1] + "/"
         if (type(choice) is not str) and choice.status:
             return
         elif os.path.isdir(new_dir): 
             directory(new_dir)
-        elif choice[:-1] == "e":
-            return
         else:
             if sys.argv[1] == 'vim':
                 vim(base, choice[:-1])
