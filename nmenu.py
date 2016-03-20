@@ -15,7 +15,7 @@ def directory(base):
         paths = ["e", ".."] + sorted(os.listdir("."))
         choice = dmenu(paths)
         new_dir = base + choice[:-1] + "/"
-        if choice.status:
+        if (type(choice) is not str) and choice.status:
             return
         elif os.path.isdir(new_dir): 
             directory(new_dir)
