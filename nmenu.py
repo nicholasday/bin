@@ -15,9 +15,11 @@ def directory(base):
         paths = [".."] + sorted(os.listdir("."))
         choice = dmenu(paths)
         new_dir = base + choice[:-1] + "/"
-        if (type(choice) is not str) and choice.status:
+        if choice == '':
             return
-        elif os.path.isdir(new_dir): 
+        if (type(choice) is not str):
+            return
+        elif os.path.isdir(new_dir):
             directory(new_dir)
         else:
             if sys.argv[1] == 'vim':
