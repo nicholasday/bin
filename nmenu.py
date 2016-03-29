@@ -23,8 +23,13 @@ def directory(base):
             if sys.argv[1] == 'vim':
                 vim(base, choice[:-1])
             elif sys.argv[1] == 'execute':
-                cmd = shlex.split('bash -c ' + base + choice[:-1])
-                run(cmd)
+                execute(base, choice[:-1])
+
+def execute(base, choice):
+    dmenu_next = dmenu(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+    print(dmenu_next)
+    cmd = shlex.split('bash -c "' + base + choice + ' ' + dmenu_next[:-1] + '"')
+    run(cmd)
 
 def note(base, choice):
     content = dmenu("")
@@ -35,7 +40,7 @@ def note(base, choice):
 def vim(base, choice):
     path = os.path.dirname(__file__)
     # Only works if not run in current directory
-    cmd = shlex.split('urxvt -e bash -c "' + path + '/nvim.sh ' + base + choice + '"')
+    cmd = shlex.split('urxvt -e bash -c "' + path + '/run.sh nvim ' + base + choice + '"')
     run(cmd)
 
 if __name__ == "__main__":
